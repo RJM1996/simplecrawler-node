@@ -13,7 +13,14 @@ async function getZhihuHotList() {
     };
     num++;
   });
-  fs.writeFileSync(`data/zhihu.json`, JSON.stringify(hotList, null, 2));
+  // 获取今日日期的格式化字符串
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  const yyyy = today.getFullYear();
+  const todayStr = `${yyyy}-${mm}-${dd}`;
+
+  fs.writeFileSync(`data/zhihu-${todayStr}.json`, JSON.stringify(hotList, null, 2));
 }
 
 getZhihuHotList();
